@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function GIS- OpenAPI 3.0
+  description: >-
+    Dokumentasi API untuk Aplikasi dari Cloud function
+  termsOfService: https://github.com/angkringankuy/swagger
+  contact:
+    email: masyahida4@gmail.com
+  license:
+    name: Backend Package
+    url: https://pkg.go.dev/github.com/angkringankuy/backendyak
+  version: 1.0.11
+externalDocs:
+  description: Website
+  url: https://angkringankuy.github.io
+servers:
+  - url: https://asia-southeast2-rock-prism-401900.cloudfunctions.net
+tags:
+  - name: auth
+    description: Authentikasi
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://angkringankuy.github.io/backendyak
+  - name: User
+    description: Pengelolaan Data User
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://angkringankuy.github.io/backendyak/module
+paths:
+  /Login:
+    post:
+      tags:
+        - auth
+      summary: Login get Token
+      description: Login and Get Admin Token
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auth'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '405':
+          description: Invalid input
+  /Register:
+    post:
+      tags:
+        - User
+      summary: Insert User
+      description: Update data nama by volume geo
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '405':
+          description: Invalid input          
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+components:
+  schemas:
+    Response:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: Berhasil Input data
+    Auth:
+      type: object
+      properties:
+        username:
+          type: string
+          example: syahid
+        password:
+          type: string
+          example: kepo
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: Selamat Datang
+        token:
+          type: string
+          example: anjasss
+    Admin:
+      type: object
+      properties:
+        username:
+          type: string
+          example : syahid
+        password:
+          type: string
+          example: kepoah
+        role:
+          type: string
+          example: user
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Auth'
+    AdminArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuthResponse'
+  securitySchemes:
+    Login:
+      type: apiKey
+      name: Login
+      in: header
+
+      
