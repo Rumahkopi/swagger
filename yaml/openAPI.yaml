@@ -53,7 +53,7 @@ paths:
       tags:
         - admin
       summary: Insert Produk
-      description: Insert Data Produk
+      description: Insert Data Produk 
       operationId: authService
       requestBody:
         content:
@@ -69,6 +69,28 @@ paths:
                 $ref: '#/components/schemas/Response'
         '405':
           description: Invalid input          
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
+  /GetDataGeo:
+    get:
+      tags:
+        - admin
+      summary: Get Data Produk
+      description: Get Semua Data Produk
+      operationId: GetdataProduk
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/responseData'
+        '400':
+          description: Invalid status value
       security:
         - Token:
           - write:apiKey
@@ -118,6 +140,18 @@ components:
         deskripsi:
           type: string
           example: Kopi Nikmat 
+    responseData:
+      type: object
+      properties:
+        nama:
+          type: string
+          example: string
+        harga:
+          type: string
+          example: string
+        deskripsi:
+          type: string
+          example: String
   requestBodies:
     AuthReq:
       description: Request Authentication
