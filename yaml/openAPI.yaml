@@ -1,31 +1,31 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function GIS- OpenAPI 3.0
+  title: Dokumen API Cloud Function - OpenAPI 3.0
   description: >-
     Dokumentasi API untuk Aplikasi dari Cloud function
-  termsOfService: https://github.com/angkringankuy/swagger
+  termsOfService: https://github.com/Rumahkopi/swagger
   contact:
     email: masyahida4@gmail.com
   license:
     name: Backend Package
-    url: https://pkg.go.dev/github.com/angkringankuy/backendyak
+    url: https://pkg.go.dev/github.com/Rumahkopi/rkbackend
   version: 1.0.11
 externalDocs:
   description: Website
-  url: https://angkringankuy.github.io
+  url: https://rumahkopi.github.io/
 servers:
-  - url: https://asia-southeast2-rock-prism-401900.cloudfunctions.net
+  - url: https://asia-southeast2-msyahid.cloudfunctions.net
 tags:
   - name: auth
     description: Authentikasi
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://angkringankuy.github.io/backendyak
-  - name: User
-    description: Pengelolaan Data User
+      url: https://github.com/Rumahkopi/rkbackend
+  - name: Admin
+    description: Pengelolaan Data Produk
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://angkringankuy.github.io/backendyak/module
+      url: https://github.com/Rumahkopi/rkbackend
 paths:
   /Login:
     post:
@@ -48,31 +48,6 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
-  /Register:
-    post:
-      tags:
-        - User
-      summary: Insert User
-      description: Update data nama by volume geo
-      operationId: authService
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-        '405':
-          description: Invalid input          
-      security:
-        - Login:
-          - write:apiKey
-          - read:apiKey
 
 components:
   schemas:
@@ -115,9 +90,6 @@ components:
         password:
           type: string
           example: kepoah
-        role:
-          type: string
-          example: user
   requestBodies:
     AuthReq:
       description: Request Authentication
@@ -134,9 +106,9 @@ components:
             items:
               $ref: '#/components/schemas/AuthResponse'
   securitySchemes:
-    Login:
+    Token:
       type: apiKey
-      name: Login
+      name: Token
       in: header
 
       
