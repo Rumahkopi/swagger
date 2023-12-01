@@ -73,7 +73,7 @@ paths:
         - Token:
           - write:apiKey
           - read:apiKey
-  /GetDataGeo:
+  /GetDataProduk:
     get:
       tags:
         - admin
