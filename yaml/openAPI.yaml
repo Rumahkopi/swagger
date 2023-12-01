@@ -21,7 +21,7 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/Rumahkopi/rkbackend
-  - name: Admin
+  - name: admin
     description: Pengelolaan Data Produk
     externalDocs:
       description: Deskripsi dan Kode Program
@@ -48,6 +48,31 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
+  /InsertDataProduk:
+    post:
+      tags:
+        - admin
+      summary: Insert Produk
+      description: Insert Data Produk
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/produk'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '405':
+          description: Invalid input          
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
 
 components:
   schemas:
@@ -59,7 +84,7 @@ components:
           example: true
         message:
           type: string
-          example: Berhasil Input data
+          example: Berhasil Input data dengan ID 
     Auth:
       type: object
       properties:
@@ -81,15 +106,18 @@ components:
         token:
           type: string
           example: anjasss
-    Admin:
+    Produk:
       type: object
       properties:
-        username:
+        nama:
           type: string
-          example : syahid
-        password:
+          example : Kopi Aren
+        harga:
           type: string
-          example: kepoah
+          example: Rp 12.000
+        deskripsi:
+          type: string
+          example: Kopi Nikmat 
   requestBodies:
     AuthReq:
       description: Request Authentication
