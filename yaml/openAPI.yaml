@@ -134,13 +134,11 @@ paths:
       summary: Delete Produk
       description: Delete Produk
       operationId: deleteProduk
-      parameters:
-        - name: nama
-          in: query
-          description: 'Masukkan nama yang ingin di hapus.'
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produk'
       responses:
         '200':
           description: successful operation
