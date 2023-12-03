@@ -137,7 +137,7 @@ paths:
       parameters:
         - name: nama
           in: query
-          description: 'Masukkan ID yang ingin di hapus.'
+          description: 'Masukkan nama yang ingin di hapus.'
           required: true
           schema:
             type: string
