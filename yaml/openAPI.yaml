@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/produk'
+              $ref: '#/components/schemas/Produk'
       responses:
         '200':
           description: successful operation
@@ -95,6 +95,66 @@ paths:
         - Token:
           - write:apiKey
           - read:apiKey
+  /UpdateDataProduk:
+    put:
+      tags:
+        - admin
+      summary: Update Produk
+      description: Update Produk
+      operationId: updateProduk
+      parameters:
+        - name: _id
+          in: query
+          description: 'Masukkan ID user yang ingin di update.'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produk'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProdukResponse'
+        '405':
+          description: Invalid input
+      security:
+        - Token:
+            - write: apiKey
+            - read: apiKey
+  /mytodolist_deleteTodo:
+    delete:
+      tags:
+        - admin
+      summary: Delete Produk
+      description: Delete Produk
+      operationId: deleteProduk
+      parameters:
+        - name: nama
+          in: query
+          description: 'Masukkan ID yang ingin di hapus.'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProdukResponse'
+        '405':
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
 
 components:
   schemas:
@@ -140,6 +200,9 @@ components:
         deskripsi:
           type: string
           example: Kopi Nikmat 
+        stok:
+          type: string
+          example: 123
     responseData:
       type: object
       properties:
@@ -152,6 +215,15 @@ components:
         deskripsi:
           type: string
           example: String
+    ProdukResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: fehguy
   requestBodies:
     AuthReq:
       description: Request Authentication
