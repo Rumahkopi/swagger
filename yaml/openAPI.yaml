@@ -127,7 +127,7 @@ paths:
         - Token:
             - write: apiKey
             - read: apiKey
-  /mytodolist_deleteTodo:
+  /DeleteDataProduk:
     delete:
       tags:
         - admin
