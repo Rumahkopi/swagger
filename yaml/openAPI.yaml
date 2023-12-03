@@ -146,7 +146,6 @@ paths:
             - write: apiKey
             - read: apiKey
 
-
 components:
   schemas:
     Response:
@@ -194,6 +193,24 @@ components:
         stok:
           type: string
           example: 123
+    UodateProduk:
+      type: object
+      properties:
+        _id:
+          type: string
+          example : string
+        nama:
+          type: string
+          example : Kopi Aren
+        harga:
+          type: string
+          example: Rp 12.000
+        deskripsi:
+          type: string
+          example: Kopi Nikmat 
+        stok:
+          type: string
+          example: 123
     responseData:
       type: object
       properties:
@@ -214,7 +231,7 @@ components:
           example: true
         message:
           type: string
-          example: fehguy
+          example: uhuyyy
   requestBodies:
     AuthReq:
       description: Request Authentication
