@@ -106,7 +106,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Produk'
+              $ref: '#/components/schemas/UpdateProduk'
       responses:
         '200':
           description: successful operation
@@ -193,7 +193,7 @@ components:
         stok:
           type: string
           example: 123
-    UodateProduk:
+    UpdateProduk:
       type: object
       properties:
         _id:
