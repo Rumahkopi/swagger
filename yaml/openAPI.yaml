@@ -21,13 +21,18 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/Rumahkopi/rkbackend
-  - name: admin
+  - name: produk
     description: Pengelolaan Data Produk
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/Rumahkopi/rkbackend
+  - name: transaksi
+    description: Pengelolaan Data Transaksi
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/Rumahkopi/rkbackend
 paths:
-  /Login:
+  /LoginAdmin:
     post:
       tags:
         - auth
@@ -51,7 +56,7 @@ paths:
   /InsertDataProduk:
     post:
       tags:
-        - admin
+        - produk
       summary: Insert Produk
       description: Insert Data Produk 
       operationId: authService
@@ -76,7 +81,7 @@ paths:
   /GetDataProduk:
     get:
       tags:
-        - admin
+        - produk
       summary: Get Data Produk
       description: Get Semua Data Produk
       operationId: GetdataProduk
@@ -98,7 +103,7 @@ paths:
   /UpdateDataProduk:
     put:
       tags:
-        - admin
+        - produk
       summary: Update Produk
       description: Update Produk
       operationId: updateProduk
@@ -123,7 +128,7 @@ paths:
   /DeleteDataProduk:
     delete:
       tags:
-        - admin
+        - produk
       summary: Delete Produk
       description: Delete Produk
       operationId: deleteProduk
@@ -146,6 +151,54 @@ paths:
             - write: apiKey
             - read: apiKey
 
+  /InsertDataTransaksi:
+    post:
+      tags:
+        - transaksi
+      summary: Insert Transaksi
+      description: Insert Data Transaksi 
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaksi'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '405':
+          description: Invalid input          
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
+  /GetDatatransaksi:
+    get:
+      tags:
+        - transaksi
+      summary: Get Data Transaksi
+      description: Get Semua Data Transaksi
+      operationId: GetdataTransaksi
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaksi'
+        '400':
+          description: Invalid status value
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
+
 components:
   schemas:
     Response:
@@ -162,10 +215,10 @@ components:
       properties:
         username:
           type: string
-          example: syahid
+          example: admin
         password:
           type: string
-          example: kepo
+          example: adminkopi
     AuthResponse:
       type: object
       properties:
@@ -193,6 +246,33 @@ components:
         stok:
           type: string
           example: 123
+    Transaksi:
+      type: object
+      properties:
+        namapembeli:
+          type: string
+          example : syahid
+        email:
+          type: string
+          example: syahid@gmail.com
+        produk:
+          type: string
+          example: Kopi Nikmat 
+        harga:
+          type: string
+          example: 10000
+        quantity:
+          type: string
+          example : 2
+        total:
+          type: string
+          example: 20000
+        alamat:
+          type: string
+          example: sarimanis 
+        nohp:
+          type: string
+          example: 0864267354672345
     UpdateProduk:
       type: object
       properties:
