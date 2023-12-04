@@ -118,7 +118,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProduk'
+              $ref: '#/components/schemas/Produk'
       responses:
         '200':
           description: successful operation
@@ -311,24 +311,6 @@ components:
         nohp:
           type: string
           example: 0864267354672345
-    UpdateProduk:
-      type: object
-      properties:
-        _id:
-          type: string
-          example : string
-        nama:
-          type: string
-          example : Kopi Aren
-        harga:
-          type: string
-          example: Rp 12.000
-        deskripsi:
-          type: string
-          example: Kopi Nikmat 
-        stok:
-          type: string
-          example: 123
     responseData:
       type: object
       properties:
