@@ -164,8 +164,8 @@ paths:
       tags:
         - produk
       summary: Get Data Produk
-      description: Get Semua Data Produk
-      operationId: GetdataProduk
+      description: Get Data Produk By Id
+      operationId: GetOneProduk
       parameters:
         - name: _id
           in: query
