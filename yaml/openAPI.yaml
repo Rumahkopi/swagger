@@ -176,7 +176,7 @@ paths:
         - Token:
           - write:apiKey
           - read:apiKey
-  /GetDatatransaksi:
+  /GetDataTransaksi:
     get:
       tags:
         - transaksi
