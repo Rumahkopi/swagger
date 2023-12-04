@@ -107,6 +107,13 @@ paths:
       summary: Update Produk
       description: Update Produk
       operationId: updateProduk
+      parameters:
+        - name: _id
+          in: query
+          description: 'Masukkan ID Produk yang ingin di update.'
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -132,11 +139,13 @@ paths:
       summary: Delete Produk
       description: Delete Produk
       operationId: deleteProduk
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Produk'
+      parameters:
+        - name: _id
+          in: query
+          description: 'Masukkan ID Produk yang ingin di Delete.'
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: successful operation
@@ -150,6 +159,35 @@ paths:
         - Token:
             - write: apiKey
             - read: apiKey
+  /GetOneProduk:
+    get:
+      tags:
+        - produk
+      summary: Get Data Produk
+      description: Get Semua Data Produk
+      operationId: GetdataProduk
+      parameters:
+        - name: _id
+          in: query
+          description: 'Masukkan ID Produk yang ingin di Ambil Datanya.'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/responseData'
+        '400':
+          description: Invalid status value
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
 
   /InsertDataTransaksi:
     post:
