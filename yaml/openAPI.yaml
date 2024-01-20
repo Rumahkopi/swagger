@@ -21,13 +21,23 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/Rumahkopi/rkbackend
-  - name: produk
+  - name: Produk
     description: Pengelolaan Data Produk
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/Rumahkopi/rkbackend
-  - name: transaksi
+  - name: Transaksi
     description: Pengelolaan Data Transaksi
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/Rumahkopi/rkbackend
+  - name: Review
+    description: Pengelolaan Data Review Produk Dari Customer
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/Rumahkopi/rkbackend
+  - name: Keluhan
+    description: Pengelolaan Data Keluhan
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/Rumahkopi/rkbackend
@@ -56,7 +66,7 @@ paths:
   /InsertDataProduk:
     post:
       tags:
-        - produk
+        - Produk
       summary: Insert Produk
       description: Insert Data Produk 
       operationId: authService
@@ -81,7 +91,7 @@ paths:
   /GetDataProduk:
     get:
       tags:
-        - produk
+        - Produk
       summary: Get Data Produk
       description: Get Semua Data Produk
       operationId: GetdataProduk
@@ -103,7 +113,7 @@ paths:
   /UpdateDataProduk:
     put:
       tags:
-        - produk
+        - Produk
       summary: Update Produk
       description: Update Produk
       operationId: updateProduk
@@ -135,7 +145,7 @@ paths:
   /DeleteDataProduk:
     delete:
       tags:
-        - produk
+        - Produk
       summary: Delete Produk
       description: Delete Produk
       operationId: deleteProduk
@@ -162,7 +172,7 @@ paths:
   /GetOneProduk:
     get:
       tags:
-        - produk
+        - Produk
       summary: Get Data Produk
       description: Get Data Produk By Id
       operationId: GetOneProduk
@@ -189,12 +199,12 @@ paths:
           - write:apiKey
           - read:apiKey
 
-  /InsertDataTransaksi:
+  /InsertPesanReview:
     post:
       tags:
-        - transaksi
-      summary: Insert Transaksi
-      description: Insert Data Transaksi 
+        - Review
+      summary: Insert Pesan Review
+      description: Insert Data Review Produk 
       operationId: authService
       requestBody:
         content:
@@ -214,10 +224,34 @@ paths:
         - Token:
           - write:apiKey
           - read:apiKey
+          
+  /GetDataReview:
+    get:
+      tags:
+        - Review
+      summary: Get Data Review
+      description: Get Semua Data Review Produk
+      operationId: GetdataReview
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid status value
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
+
   /GetDataTransaksi:
     get:
       tags:
-        - transaksi
+        - Transaksi
       summary: Get Data Transaksi
       description: Get Semua Data Transaksi
       operationId: GetdataTransaksi
@@ -230,6 +264,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Transaksi'
+        '400':
+          description: Invalid status value
+      security:
+        - Token:
+          - write:apiKey
+          - read:apiKey
+
+  /GetDataKeluhan:
+    get:
+      tags:
+        - Keluhan
+      summary: Get Data Keluhan
+      description: Get Semua Data Keluhan dari customer
+      operationId: GetdataKeluhan
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Keluhan'
         '400':
           description: Invalid status value
       security:
@@ -284,33 +341,49 @@ components:
         stok:
           type: string
           example: 123
+    Review:
+      type: object
+      properties:
+        nama:
+          type: string
+          example : string
+        subjek:
+          type: string
+          example: string
+        pesan:
+          type: string
+          example: string
+    Keluhan:
+      type: object
+      properties:
+        complaint_number:
+          type: int
+          example : int
+        user_phone:
+          type: string
+          example: string 
+        formatedtime:
+          type: string
+          example: string
+        content:
+          type: string
+          example: string
+
     Transaksi:
       type: object
       properties:
-        namapembeli:
+        transaksi_number:
+          type: int
+          example : int
+        user_phone:
           type: string
-          example : syahid
-        email:
+          example: string 
+        formatted_time:
           type: string
-          example: syahid@gmail.com
-        produk:
+          example: string
+        buktitf:
           type: string
-          example: Kopi Nikmat 
-        harga:
-          type: string
-          example: 10000
-        quantity:
-          type: string
-          example : 2
-        total:
-          type: string
-          example: 20000
-        alamat:
-          type: string
-          example: sarimanis 
-        nohp:
-          type: string
-          example: 0864267354672345
+          example: string
     responseData:
       type: object
       properties:
@@ -321,6 +394,12 @@ components:
           type: string
           example: string
         deskripsi:
+          type: string
+          example: String
+        stok:
+          type: string
+          example: String
+        image:
           type: string
           example: String
     ProdukResponse:
